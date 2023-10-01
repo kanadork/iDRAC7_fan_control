@@ -30,6 +30,10 @@ TEMP_THRESHOLD="75" # iDRAC dynamic control enable thershold
 TEMP_SENSOR="0Eh"  # CPU 1 Temp
 #TEMP_SENSOR="0Fh"  # CPU 2 Temp (unavailable)
 
+#open the loop for running as service
+while true
+do
+
 # Get system date & time.
 DATE=$(date +%d-%m-%Y\ %H:%M:%S)
 echo "Date $DATE"
@@ -40,7 +44,7 @@ T=$(ipmitool  sdr type temperature | grep $TEMP_SENSOR | cut -d"|" -f5 | cut -d"
 echo "--> Current CPU Temp in degC: $T" #added unit
 
 # If ambient temperature is above 75deg C enable dynamic control and exit, if below set manual control.
-if [[ $T > $TEMP_THRESHOLD ]]
+if [[ $T -ge $TEMP_THRESHOLD ]]
 then
   echo "--> Temperature is above 75 deg C"
   echo "--> Enabled dynamic fan control"
@@ -100,3 +104,8 @@ elif [ "$T" -ge 70 ] && [ "$T" -le 75 ]
 #  ipmitool raw 0x30 0x30 0x02 0xff $SPEED50 
   
 fi
+
+#close the loop
+ sleep 10
+ 
+done
