@@ -1,0 +1,8 @@
+[Unit]
+Description=IPMI fan override for Poweredge R320
+
+[Service]
+ExecStart=/bin/bash /usr/bin/fan_control.sh
+
+[Install]
+WantedBy=multi-user.target
