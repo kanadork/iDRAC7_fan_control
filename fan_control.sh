@@ -46,13 +46,11 @@ echo "--> Current CPU Temp in degC: $T" #added unit
 # If ambient temperature is above 75deg C enable dynamic control and exit, if below set manual control.
 if [[ $T -ge $TEMP_THRESHOLD ]]
 then
-  echo "--> Temperature is above 75 deg C"
-  echo "--> Enabled dynamic fan control"
+  echo "--> Temperature is above 75 deg C --> Enabled dynamic fan control"
   ipmitool raw 0x30 0x30 0x01 0x01
   exit 1
 else
-  echo "--> Temperature is below 75 deg C"
-  echo "--> Disabled dynamic fan control"
+  echo "--> Temperature is below 75 deg C --> Disabled dynamic fan control"
   ipmitool raw 0x30 0x30 0x01 0x00
 fi
 
