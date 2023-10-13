@@ -3,6 +3,8 @@ Description=IPMI fan override for Poweredge R320
 
 [Service]
 ExecStart=/bin/bash /usr/bin/fan_control.sh
+Restart=on-failure
+RestartSec=60
 
 [Install]
 WantedBy=multi-user.target
